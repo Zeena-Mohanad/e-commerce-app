@@ -57,7 +57,7 @@ class _SearchProductsViewState extends State<SearchProductsView> {
               itemBuilder: (context, index) {
                 return const Center(child: CircularProgressIndicator());
               });
-        } else if (widget.search.isEmpty) {
+        } else if (widget.search.isEmpty && widget.categoryId.isEmpty) {
           return SearchGridView(products: products);
         } else if (widget.search.isNotEmpty) {
           return SearchGridView(products: search);

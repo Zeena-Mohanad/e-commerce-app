@@ -20,19 +20,22 @@ class SearchPage extends StatelessWidget {
               onPressed: () {}, icon: const Icon(Icons.filter_alt_outlined)),
         )
       ]),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Consumer<ProductProvider>(
-                builder: (context, productProvider, widget) {
-              return Container(
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.only(left: 20, right: 20),
+      body: Consumer<ProductProvider>(
+          builder: (context, productProvider, widget) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                padding: const EdgeInsets.only(left: 20, right: 14),
                 decoration: BoxDecoration(
                     color: const Color(0xFFD9D9D9),
                     borderRadius: BorderRadius.circular(24)),
                 child: TextField(
                   onChanged: (value) {
+                    productProvider.search(value);
+                  },
+                  onSubmitted: (value) {
                     productProvider.search(value);
                   },
                   controller: _searchController,
@@ -43,16 +46,16 @@ class SearchPage extends StatelessWidget {
                       hintText: 'What are you looking for?',
                       border: InputBorder.none),
                 ),
-              );
-            }),
-            SearchProductsView(
-              categoryId: categoryId,
-              categoryName: categoryName,
-              search: _searchController.text,
-            )
-          ],
-        ),
-      ),
+              ),
+              SearchProductsView(
+                categoryId: categoryId,
+                categoryName: categoryName,
+                search: _searchController.text,
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }

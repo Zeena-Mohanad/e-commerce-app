@@ -23,19 +23,19 @@ Future<dynamic> ShowCustomModalBottomSheet(
             children: [
               const Text(
                 'Selected items (3)',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'Subtotal',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     'IQD $subtotal',
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -44,12 +44,12 @@ Future<dynamic> ShowCustomModalBottomSheet(
                 children: [
                   const Text(
                     'Shipping',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     'IQD $shipping',
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -58,12 +58,12 @@ Future<dynamic> ShowCustomModalBottomSheet(
                 children: [
                   const Text(
                     'Total',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     'IQD $total',
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),

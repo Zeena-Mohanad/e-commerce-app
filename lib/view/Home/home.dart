@@ -47,15 +47,13 @@ class _HomePageState extends State<HomePage> {
             if (signUp.isBack == false) {
               return const Text(
                 'Welcome to UR store',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               );
             } else {
               return Text(
                 'Hi ${signUp.dataApi.name}!',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               );
             }
@@ -96,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(left: 20, top: 8, bottom: 8),
               child: Text(
                 'Categories',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             const CategoriesView(),
@@ -107,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Text(
                     'New',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   TextButton(
                       onPressed: () {
@@ -123,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                       child: const Text(
                         'see all',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 14, fontWeight: FontWeight.w500),
                       ))
                 ],
               ),

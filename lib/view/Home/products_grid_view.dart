@@ -33,6 +33,7 @@ class _ProductsGridViewState extends State<ProductsGridView> {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: (1 / 1),
                 crossAxisCount: 2,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,

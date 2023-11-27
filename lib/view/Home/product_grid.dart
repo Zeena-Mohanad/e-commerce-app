@@ -36,7 +36,8 @@ class ProductGrid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 8, top: 4),
+              padding:
+                  const EdgeInsets.only(bottom: 8, top: 4, right: 4, left: 4),
               child: Container(
                 height: 160,
                 decoration: BoxDecoration(
@@ -47,8 +48,9 @@ class ProductGrid extends StatelessWidget {
                   padding: const EdgeInsets.all(5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image(
-                      image: NetworkImage(image),
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.contain,
                       height: 160,
                       width: 160,
                     ),
@@ -67,7 +69,7 @@ class ProductGrid extends StatelessWidget {
                         child: Text(
                           name,
                           style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               overflow: TextOverflow.ellipsis),
                         ),
@@ -77,7 +79,7 @@ class ProductGrid extends StatelessWidget {
                   Text(
                     ('IQD $price'),
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

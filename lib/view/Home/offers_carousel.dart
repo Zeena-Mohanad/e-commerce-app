@@ -33,10 +33,10 @@ class OffersCarousel extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontSize: 16),
                 ),
                 const Text(
-                  '15% discount for\nthe first transaction',
+                  '10% discount for\nthe first transaction',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
@@ -69,12 +69,11 @@ class OffersCarousel extends StatelessWidget {
             padding: const EdgeInsets.only(right: 40),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image(
-                image: NetworkImage(
-                  cardImage,
-                ),
-                width: 160,
-                height: 160,
+              child: Image.network(
+                cardImage,
+                width: 120,
+                height: 120,
+                fit: BoxFit.contain,
               ),
             ),
           ),

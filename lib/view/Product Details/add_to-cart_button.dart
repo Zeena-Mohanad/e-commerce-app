@@ -38,7 +38,8 @@ class AddToCartButton extends StatelessWidget {
           ),
           child: ElevatedButton(
             onPressed: () {
-              cart.addToCart(productId: productId, name: name, price: price, image: image);
+              cart.addToCart(
+                  productId: productId, name: name, price: price, image: image);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CartPage()),
@@ -47,7 +48,7 @@ class AddToCartButton extends StatelessWidget {
             style: const ButtonStyle(),
             child: const Text(
               'Add to cart',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 18),
             ),
           ),
         ),

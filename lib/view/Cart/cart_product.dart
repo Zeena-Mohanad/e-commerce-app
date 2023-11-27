@@ -54,18 +54,15 @@ class CartProduct extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                    width: 140,
+                  Expanded(
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Text(
-                            name,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                overflow: TextOverflow.ellipsis),
-                          ),
+                        Text(
+                          name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              overflow: TextOverflow.ellipsis),
                         ),
                       ],
                     ),
@@ -79,30 +76,32 @@ class CartProduct extends StatelessWidget {
               ),
             ),
             Consumer<CartProvider>(builder: (context, cartProvider, widget) {
-              return Align(
-                alignment: Alignment.bottomRight,
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed: () {
-                        cartProvider.removeFromCart(
-                            id); // Implement removeFromCart in CartProvider
-                      },
-                    ),
-                    Text(quantity.toString()),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        cartProvider.addToCart(
-                          productId: id,
-                          name: name,
-                          price: price,
-                          image: image,
-                        );
-                      },
-                    ),
-                  ],
+              return Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () {
+                          cartProvider.removeFromCart(
+                              id); // Implement removeFromCart in CartProvider
+                        },
+                      ),
+                      Text(quantity.toString()),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () {
+                          cartProvider.addToCart(
+                            productId: id,
+                            name: name,
+                            price: price,
+                            image: image,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
             })

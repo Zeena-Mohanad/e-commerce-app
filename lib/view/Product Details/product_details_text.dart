@@ -31,11 +31,11 @@ class ProductDetailsText extends StatelessWidget {
           ),
           Text(
             productName,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Text(
             "IQD $price",
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 16, bottom: 16),
@@ -51,7 +51,7 @@ class ProductDetailsText extends StatelessWidget {
           ),
           Text(
             description,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),

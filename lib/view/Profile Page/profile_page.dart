@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/Provider/log_in_provider.dart';
 import 'package:e_commerce_app/Provider/sign_up_provider.dart';
 import 'package:e_commerce_app/view/Account%20Info/account_info.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,15 @@ class ProfilePage extends StatelessWidget {
             backgroundColor: Color(0xFFD9D9D9),
             backgroundImage: AssetImage('assets/avatar.jpg'),
           ),
-          title: const Text('User name'),
+          title: Consumer<LogInProvider>(
+            builder: (context,login,widget) {
+              if(login.isBack==true){
+                
+                return Text('');
+              }
+              return const Text('User name');
+            }
+          ),
           actions: [
             IconButton(
                 onPressed: () {
@@ -30,30 +39,39 @@ class ProfilePage extends StatelessWidget {
                 icon: const Icon(Icons.edit))
           ],
         ),
-        body: const Padding(
-          padding: EdgeInsets.only(top: 20),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20),
           child: Column(
             children: [
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.assignment_outlined),
                 title: Text('Orders'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.notifications_outlined),
                 title: Text('Notifications'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.support_agent_outlined),
                 title: Text('Support'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.info_outline_rounded),
                 title: Text('About'),
               ),
-              ListTile(
-                leading: Icon(Icons.logout_outlined),
-                title: Text('Logout'),
-              )
+              Consumer<LogInProvider>(builder: (context, login, widget) {
+                if (login.isBack == true) {
+                  return const ListTile(
+                    leading: Icon(Icons.logout_outlined),
+                    title: Text('Logout'),
+                  );
+                } else {
+                  return const ListTile(
+                    leading: Icon(Icons.app_registration_outlined),
+                    title: Text('Register'),
+                  );
+                }
+              }),
             ],
           ),
         ),

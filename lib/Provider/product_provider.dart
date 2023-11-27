@@ -38,6 +38,8 @@ class ProductProvider extends ChangeNotifier {
           .where((element) =>
               element.name!.toLowerCase().startsWith(searchText.toLowerCase()))
           .toList());
+    } else {
+      searchProducts.addAll(products);
     }
     notifyListeners();
   }
