@@ -1,5 +1,7 @@
+import 'package:e_commerce_app/Provider/log_in_provider.dart';
 import 'package:e_commerce_app/Provider/product_provider.dart';
 import 'package:e_commerce_app/Provider/sign_up_provider.dart';
+import 'package:e_commerce_app/models/log_in_body.dart';
 import 'package:e_commerce_app/view/Cart/cart.dart';
 import 'package:e_commerce_app/view/Home/categories_view.dart';
 import 'package:e_commerce_app/view/Home/offers_carousel.dart';
@@ -25,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -43,20 +46,36 @@ class _HomePageState extends State<HomePage> {
         ],
         title: Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: Consumer<SignUpProvider>(builder: (context, signUp, widget) {
-            if (signUp.isBack == false) {
-              return const Text(
-                'Welcome to UR store',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              );
-            } else {
-              return Text(
-                'Hi ${signUp.dataApi.name}!',
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-              );
-            }
+          child: Consumer2<LogInProvider, SignUpProvider>(
+              builder: (context, logInProvider, signUpProvider, widget) {
+            return FutureBuilder<bool>(
+              future: logInProvider.isLoggedIn(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Future is still loading
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  // Handle error
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  // Future is completed
+                  if (snapshot.data == true) {
+                    return Text(
+                      'Hi ${signUpProvider.dataApi.name}!',
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    );
+                  } else {
+                    return const Text(
+                      'Welcome to UR store',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    );
+                  }
+                }
+              },
+            );
           }),
         ),
       ),

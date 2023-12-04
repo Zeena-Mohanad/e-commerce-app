@@ -5,6 +5,7 @@ import 'package:e_commerce_app/view/Navigation%20Bar/bottom_navigation_bar.dart'
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_button.dart';
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_text.dart';
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_text_field.dart';
+import 'package:e_commerce_app/view/Verification%20page/verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class SignUpPage extends StatelessWidget {
       if (provider.isBack) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainNavigationBar()),
+          MaterialPageRoute(builder: (context) => VerificationPage()),
         );
       }
     }

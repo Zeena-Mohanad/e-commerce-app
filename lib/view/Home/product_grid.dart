@@ -30,7 +30,7 @@ class ProductGrid extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Color.fromARGB(36, 11, 11, 57),
+          color: const Color.fromARGB(36, 11, 11, 57),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +41,7 @@ class ProductGrid extends StatelessWidget {
               child: Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Padding(

@@ -18,15 +18,12 @@ class ProfilePage extends StatelessWidget {
             backgroundColor: Color(0xFFD9D9D9),
             backgroundImage: AssetImage('assets/avatar.jpg'),
           ),
-          title: Consumer<LogInProvider>(
-            builder: (context,login,widget) {
-              if(login.isBack==true){
-                
-                return Text('');
-              }
-              return const Text('User name');
+          title: Consumer<LogInProvider>(builder: (context, login, widget) {
+            if (login.isBack == true) {
+              return Text(login.);
             }
-          ),
+            return const Text('User name');
+          }),
           actions: [
             IconButton(
                 onPressed: () {
@@ -60,17 +57,40 @@ class ProfilePage extends StatelessWidget {
                 title: Text('About'),
               ),
               Consumer<LogInProvider>(builder: (context, login, widget) {
-                if (login.isBack == true) {
-                  return const ListTile(
-                    leading: Icon(Icons.logout_outlined),
-                    title: Text('Logout'),
-                  );
-                } else {
-                  return const ListTile(
-                    leading: Icon(Icons.app_registration_outlined),
-                    title: Text('Register'),
-                  );
-                }
+                return FutureBuilder(
+                    future: login.isLoggedIn(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Future is still loading
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        // Handle error
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        if (snapshot.data == true) {
+                          return GestureDetector(
+                            onTap: () {
+                              login.logout();
+                              Navigator.pushNamed(context, '/home');
+                            },
+                            child: const ListTile(
+                              leading: Icon(Icons.logout_outlined),
+                              title: Text('Logout'),
+                            ),
+                          );
+                        } else {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: const ListTile(
+                              leading: Icon(Icons.app_registration_outlined),
+                              title: Text('Register'),
+                            ),
+                          );
+                        }
+                      }
+                    });
               }),
             ],
           ),

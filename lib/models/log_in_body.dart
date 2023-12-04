@@ -1,6 +1,6 @@
 class LogInBody{
-  final String email;
-  final String password;
+  String email;
+  String password;
 
   LogInBody({required this.email, required this.password});
 

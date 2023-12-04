@@ -8,13 +8,16 @@ class LogInProvider extends ChangeNotifier {
   bool loading = false;
   bool isBack = false;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   Future<void> postLogIn(LogInBody body) async {
     loading = true;
     notifyListeners();
     http.Response response = (await logIn(body))!;
     if (response.statusCode == 200) {
       isBack = true;
+      
       saveUserData(body.email, body.password);
+      
     }
     loading = false;
     notifyListeners();
@@ -24,12 +27,18 @@ class LogInProvider extends ChangeNotifier {
     final SharedPreferences prefs = await _prefs;
     prefs.setString('email', email);
     prefs.setString('password', password);
+    prefs.setBool('isLoggedIn', true);
   }
 
   Future<void> logout() async {
     final SharedPreferences prefs = await _prefs;
     prefs.remove('email');
     prefs.remove('password');
-    // Add any other data you want to clear on logout
+    prefs.setBool('isLoggedIn', false);
+  }
+
+  Future<bool> isLoggedIn() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getBool('isLoggedIn') ?? false;
   }
 }
