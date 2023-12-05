@@ -11,6 +11,7 @@ class InfoTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xffF5F5F5),

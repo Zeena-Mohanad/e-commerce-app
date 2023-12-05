@@ -20,9 +20,9 @@ class ProfilePage extends StatelessWidget {
           ),
           title: Consumer<LogInProvider>(builder: (context, login, widget) {
             if (login.isBack == true) {
-              return Text(login.);
+              return Text(login.userData.name!);
             }
-            return const Text('User name');
+            return const Text('Register to the account');
           }),
           actions: [
             IconButton(

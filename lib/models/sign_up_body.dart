@@ -1,4 +1,5 @@
 class SignUpBody {
+  String? id;
   String? name;
   String? email;
   String? password;
@@ -15,6 +16,7 @@ class SignUpBody {
       this.gender});
 
   SignUpBody.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
     name = json['name'];
     email = json['email'];
     password = '';

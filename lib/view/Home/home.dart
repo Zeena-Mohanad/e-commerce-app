@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> {
         ],
         title: Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: Consumer2<LogInProvider, SignUpProvider>(
-              builder: (context, logInProvider, signUpProvider, widget) {
+          child: Consumer<LogInProvider>(
+              builder: (context, logInProvider, widget) {
             return FutureBuilder<bool>(
               future: logInProvider.isLoggedIn(),
               builder: (context, snapshot) {
@@ -56,12 +56,13 @@ class _HomePageState extends State<HomePage> {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   // Handle error
-                  return Text('Error: ${snapshot.error}');
+                  print('Error: ${snapshot.error}');
+                  return const CircularProgressIndicator();
                 } else {
                   // Future is completed
                   if (snapshot.data == true) {
                     return Text(
-                      'Hi ${signUpProvider.dataApi.name}!',
+                      'Hi ${logInProvider.userData.name}!',
                       style: const TextStyle(
                         fontSize: 18,
                       ),

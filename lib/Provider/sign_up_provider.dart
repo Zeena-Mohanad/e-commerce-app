@@ -34,4 +34,6 @@ class SignUpProvider extends ChangeNotifier {
     prefs.setString('name', name);
     prefs.setString('phone', phone);
   }
+
+  
 }
