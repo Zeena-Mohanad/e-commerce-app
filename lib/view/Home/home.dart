@@ -1,7 +1,5 @@
 import 'package:e_commerce_app/Provider/log_in_provider.dart';
 import 'package:e_commerce_app/Provider/product_provider.dart';
-import 'package:e_commerce_app/Provider/sign_up_provider.dart';
-import 'package:e_commerce_app/models/log_in_body.dart';
 import 'package:e_commerce_app/view/Cart/cart.dart';
 import 'package:e_commerce_app/view/Home/categories_view.dart';
 import 'package:e_commerce_app/view/Home/offers_carousel.dart';

@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/Provider/log_in_provider.dart';
-import 'package:e_commerce_app/Provider/sign_up_provider.dart';
 import 'package:e_commerce_app/view/Account%20Info/account_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

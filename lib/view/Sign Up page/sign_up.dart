@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/Provider/sign_up_provider.dart';
 import 'package:e_commerce_app/models/sign_up_body.dart';
 import 'package:e_commerce_app/view/LogIn%20page/login.dart';
-import 'package:e_commerce_app/view/Navigation%20Bar/bottom_navigation_bar.dart';
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_button.dart';
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_text.dart';
 import 'package:e_commerce_app/view/Sign%20Up%20page/custom_text_field.dart';
@@ -53,17 +52,15 @@ class SignUpPage extends StatelessWidget {
       child: Consumer<SignUpProvider>(builder: (context, data, widget) {
         return data.loading
             ? Center(
-                child: Container(
-                  child: SpinKitThreeBounce(
-                    itemBuilder: (BuildContext context, int index) {
-                      return DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: index.isEven ? Colors.red : Colors.green,
-                        ),
-                      );
-                    },
-                  ),
+                child: SpinKitThreeBounce(
+                  itemBuilder: (BuildContext context, int index) {
+                    return DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: index.isEven ? Colors.red : Colors.green,
+                      ),
+                    );
+                  },
                 ),
               )
             : SingleChildScrollView(

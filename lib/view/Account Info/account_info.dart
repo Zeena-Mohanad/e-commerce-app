@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/Provider/log_in_provider.dart';
-import 'package:e_commerce_app/Provider/sign_up_provider.dart';
 import 'package:e_commerce_app/models/sign_up_body.dart';
 import 'package:e_commerce_app/view/Account%20Info/info_text.dart';
 import 'package:e_commerce_app/view/Account%20Info/info_text_field.dart';
@@ -15,37 +14,46 @@ class AccountInfo extends StatefulWidget {
 }
 
 class _AccountInfoState extends State<AccountInfo> {
-  //String? gender;
-  late LogInProvider logInProvider; // Use late for non-nullable variable
+  final GlobalKey<FormState> formKey = GlobalKey();
+  late TextEditingController emailController = TextEditingController();
+  late TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswodController = TextEditingController();
+  late TextEditingController phoneController = TextEditingController();
 
-  late TextEditingController phoneController;
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController genderController;
+  Future<void> updateUserInfo() async {
+    String email = nameController.text.trim();
+    String name = nameController.text.trim();
+    String phone = phoneController.text.trim();
+    String password = passwordController.text.trim();
+    String repeatPassword = confirmPasswodController.text.trim();
+
+    SignUpBody signUpBody = SignUpBody(
+      email: email,
+      name: name,
+      password: password,
+      repeatPassword: repeatPassword,
+      phone: phone,
+    );
+    var provider = Provider.of<LogInProvider>(context, listen: false);
+
+    try {
+      // Await putUser
+      await provider.putUser(signUpBody);
+    } catch (e) {
+      print('Failed to update user info: $e');
+    }
+  }
+
+  late LogInProvider logInProvider; // Use late for non-nullable variable
 
   @override
   void initState() {
     super.initState();
     logInProvider = Provider.of<LogInProvider>(context, listen: false);
+    emailController = TextEditingController(text: logInProvider.userData.email);
     phoneController = TextEditingController(text: logInProvider.userData.phone);
     nameController = TextEditingController(text: logInProvider.userData.name);
-    emailController = TextEditingController(text: logInProvider.userData.email);
-    genderController =
-        TextEditingController(text: logInProvider.userData.gender);
-  }
-
-  Future<void> updateUserInfo() async {
-    String name = nameController.text.trim();
-    String phone = phoneController.text.trim();
-    String email = emailController.text.trim();
-    String gender = genderController.text.trim();
-
-    SignUpBody signUpBody =
-        SignUpBody(name: name, email: email, phone: phone, gender: gender);
-    var provider = Provider.of<LogInProvider>(context, listen: false);
-
-    await provider.putUser(signUpBody);
-    if (provider.isBack) {}
   }
 
   @override
@@ -68,82 +76,85 @@ class _AccountInfoState extends State<AccountInfo> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-          )
-        ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const InfoText(
-                    info: 'Email',
-                  ),
-                  InfoTextField(
-                    controller: emailController,
-                  ),
-                  const InfoText(
-                    info: 'Mobile Number',
-                  ),
-                  InfoTextField(
-                    controller: phoneController,
-                  ),
-                  const InfoText(
-                    info: 'User Name',
-                  ),
-                  InfoTextField(
-                    controller: nameController,
-                  ),
-                  const InfoText(
-                    info: 'Gender',
-                  ),
-                  InfoTextField(
-                    controller: genderController,
-                  ),
-                ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const InfoText(
+                      info: 'Email',
+                    ),
+                    InfoTextField(
+                      controller: emailController,
+                    ),
+                    const InfoText(
+                      info: 'User Name',
+                    ),
+                    InfoTextField(
+                      controller: nameController,
+                    ),
+                    const InfoText(
+                      info: 'Password',
+                    ),
+                    InfoTextField(
+                      controller: passwordController,
+                    ),
+                    const InfoText(
+                      info: 'Confirm Password',
+                    ),
+                    InfoTextField(
+                      controller: confirmPasswodController,
+                    ),
+                    const InfoText(
+                      info: 'Mobile Number',
+                    ),
+                    InfoTextField(
+                      controller: phoneController,
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: RadioListTile(
-            //         contentPadding: EdgeInsets.zero,
-            //         title: const Text('Male'),
-            //         value: 'male',
-            //         groupValue: gender,
-            //         onChanged: (value) {
-            //           setState(() {
-            //             gender = value.toString();
-            //           });
-            //         },
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: RadioListTile(
-            //         contentPadding: EdgeInsets.zero,
-            //         title: const Text('Female'),
-            //         value: 'female',
-            //         groupValue: gender,
-            //         onChanged: (value) {
-            //           setState(() {
-            //             gender = value.toString();
-            //           });
-            //         },
-            //       ),
-            //     ),
-            //   ],
-            // )
-            CustomButton(text: 'Apply Changes', onPressed: updateUserInfo),
-          ],
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: RadioListTile(
+              //         contentPadding: EdgeInsets.zero,
+              //         title: const Text('Male'),
+              //         value: 'male',
+              //         groupValue: gender,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             gender = value.toString();
+              //           });
+              //         },
+              //       ),
+              //     ),
+              //     Expanded(
+              //       child: RadioListTile(
+              //         contentPadding: EdgeInsets.zero,
+              //         title: const Text('Female'),
+              //         value: 'female',
+              //         groupValue: gender,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             gender = value.toString();
+              //           });
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // )
+              CustomButton(text: 'Apply Changes', onPressed: updateUserInfo),
+            ],
+          ),
         ),
       ),
     );

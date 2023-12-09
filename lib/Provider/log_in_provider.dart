@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:e_commerce_app/api/log_in_api.dart';
 import 'package:e_commerce_app/api/update_user_api.dart';
 import 'package:e_commerce_app/models/log_in_body.dart';
@@ -29,10 +28,16 @@ class LogInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> putUser(SignUpBody body)async{
+  Future<String?> getUserId() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getString('_id');
+  }
+
+  Future<void> putUser(SignUpBody body) async {
     loading = true;
     notifyListeners();
-    http.Response response = (await updateUser(body))!;
+    String? userId = await getUserId();
+    http.Response response = (await updateUser(body, userId!))!;
     if (response.statusCode == 200) {
       userData = SignUpBody.fromJson(json.decode(response.body)['dataobj']);
       isBack = true;
@@ -53,6 +58,7 @@ class LogInProvider extends ChangeNotifier {
     prefs.setString('name', name);
     prefs.setString('phone', phone);
     prefs.setBool('isLoggedIn', true);
+    isBack = true;
   }
 
   Future<void> logout() async {
@@ -68,6 +74,25 @@ class LogInProvider extends ChangeNotifier {
 
   Future<bool> isLoggedIn() async {
     final SharedPreferences prefs = await _prefs;
+    isBack = true;
     return prefs.getBool('isLoggedIn') ?? false;
+  }
+
+  Future<void> loadUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? id = prefs.getString('id');
+    String? name = prefs.getString('name');
+    String? email = prefs.getString('email');
+    String? password = prefs.getString('password');
+    String? phone = prefs.getString('phone');
+
+    if (id != null &&
+        name != null &&
+        email != null &&
+        password != null &&
+        phone != null) {
+      userData = SignUpBody(
+          id: id, name: name, email: email, password: password, phone: phone);
+    }
   }
 }

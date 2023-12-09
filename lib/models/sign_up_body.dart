@@ -8,7 +8,8 @@ class SignUpBody {
   String? gender;
 
   SignUpBody(
-      {this.name,
+      {this.id,
+        this.name,
       this.email,
       this.password,
       this.repeatPassword,
